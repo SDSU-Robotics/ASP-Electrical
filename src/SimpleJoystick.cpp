@@ -51,19 +51,25 @@ int main (int argc, char **argv)
 	double axes[6];
 
 	ros::Publisher speed_pub = n.advertise<std_msgs::Float32>("speed", 100);
-	
+	ros::Publisher speed2_pub = n.advertise<std_msgs::Float32>("speed2", 100);
+
     std_msgs::Float32 speed_msg;
+	std_msgs::Float32 speed2_msg;
 	
 	while (ros::ok())
 	{
         listener.getJoyVals(buttons, axes);
 
 		// get controller values
-		float speed = axes[1]; // left Y
+		float speed = axes[4]; // left Y
+		float speed2 = axes[1]; 
 
 		speed_msg.data = speed;
+		speed2_msg.data = speed2;
+
 		
 		speed_pub.publish(speed_msg);
+		speed2_pub.publish(speed2_msg);
 		
 		ros::spinOnce();
 		loop_rate.sleep();

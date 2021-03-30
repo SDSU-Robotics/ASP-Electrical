@@ -20,7 +20,7 @@ public:
 	void setSpeed(const std_msgs::Float32 msg);
 
 private:
-	TalonSRX _motor = {DeviceIDs::motor};
+	TalonSRX _motor = {DeviceIDs::motor2};
 };
 
 
@@ -34,16 +34,15 @@ int main (int argc, char **argv)
 
 	Listener listener;
 
-	ros::Subscriber speed_sub = n.subscribe("speed", 1000, &Listener::setSpeed, &listener);
+	ros::Subscriber speed2_sub = n.subscribe("speed2", 1000, &Listener::setSpeed, &listener);
 
 	ros::spin();
 
 	return 0;
 }
-
-
 void Listener::setSpeed(const std_msgs::Float32 msg)
 {
+
 	// limit values
 	float percentOutput = msg.data;
 	if (percentOutput < - 1.0f)
@@ -52,6 +51,5 @@ void Listener::setSpeed(const std_msgs::Float32 msg)
 		percentOutput = 1.0f;
 
 	_motor.Set(ControlMode::PercentOutput, percentOutput);
-
 	ctre::phoenix::unmanaged::FeedEnable(100); // feed watchdog
 }

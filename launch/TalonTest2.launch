@@ -7,5 +7,4 @@
 
 	<node respawn="true" pkg="phoenix-template" type="TalonPercentOutput" name="TalonPercentOutput" />
 	<node respawn="true" pkg="phoenix-template" type="SimpleJoystick" name="SimpleJoystick" />
-	<node respawn="true" pkg="phoenix-template" type="TalonPercentOutput2" name="TalonPercentOutput2" />
 </launch>
